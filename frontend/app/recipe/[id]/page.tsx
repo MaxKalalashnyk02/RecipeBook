@@ -21,15 +21,12 @@ export default function RecipeDetailPage() {
       setLoading(true);
       setError('');
       
-      // Fetch main recipe details
       const recipeData = await getRecipeById(id);
       setRecipe(recipeData);
       
-      // Fetch related recipes from the same category
       if (recipeData.strCategory) {
         try {
           const categoryData = await getRecipesByCategory(recipeData.strCategory);
-          // Filter out current recipe and limit to 8 items
           const filteredCategoryRecipes = categoryData
             .filter(r => r.idMeal !== recipeData.idMeal)
             .slice(0, 8);
@@ -105,7 +102,6 @@ export default function RecipeDetailPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="mx-auto px-4 sm:px-6 lg:px-8 py-4 max-w-7xl">
           <div className="flex items-center gap-4">
@@ -124,12 +120,9 @@ export default function RecipeDetailPage() {
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-7xl">
         <div className="lg:gap-8 lg:grid lg:grid-cols-4">
-          {/* Main Content */}
           <div className="lg:col-span-3">
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              {/* Recipe Header */}
               <div className="md:flex">
-                {/* Recipe Image */}
                 <div className="md:w-1/3">
                   <div className="relative h-64 md:h-80">
                     <Image
@@ -142,7 +135,6 @@ export default function RecipeDetailPage() {
                   </div>
                 </div>
 
-                {/* Recipe Info */}
                 <div className="p-6 md:w-2/3">
                   <h1 className="mb-4 font-bold text-gray-900 text-3xl md:text-left text-center">
                     {recipe.strMeal}
@@ -196,10 +188,8 @@ export default function RecipeDetailPage() {
                 </div>
               </div>
 
-              {/* Recipe Content */}
               <div className="p-6 border-t">
                 <div className="lg:gap-8 lg:grid lg:grid-cols-2">
-                  {/* Ingredients */}
                   <div>
                     <h2 className="mb-4 font-bold text-gray-900 text-2xl">Ingredients</h2>
                     <div className="space-y-2">
@@ -222,7 +212,6 @@ export default function RecipeDetailPage() {
                     </div>
                   </div>
 
-                  {/* Instructions */}
                   <div>
                     <h2 className="mb-4 font-bold text-gray-900 text-2xl">Instructions</h2>
                     <div className="max-w-none prose prose-sm">
@@ -235,7 +224,6 @@ export default function RecipeDetailPage() {
                   </div>
                 </div>
 
-                {/* Source Link */}
                 {recipe.strSource && (
                   <div className="mt-8 pt-6 border-t">
                     <a
@@ -252,7 +240,6 @@ export default function RecipeDetailPage() {
             </div>
           </div>
 
-          {/* Sidebar */}
           <div className="lg:col-span-1 mt-8 lg:mt-0">
             <div className="bg-white shadow-md p-6 rounded-lg">
               <h3 className="mb-4 font-bold text-gray-900 text-lg">
